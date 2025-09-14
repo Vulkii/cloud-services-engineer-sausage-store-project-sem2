@@ -135,7 +135,6 @@ jobs:
           helm upgrade --install sausage-store chartmuseum/${CHART_NAME} \
             --version "${CHART_VER}" \
             --namespace "$SAUSAGE_STORE_NAMESPACE" \
-            --create-namespace \
             --set backend.image="${{ secrets.DOCKER_USER }}/sausage-backend:latest" \
             --set frontend.image="${{ secrets.DOCKER_USER }}/sausage-frontend:latest" \
             --set backendReport.image="${{ secrets.DOCKER_USER }}/sausage-backend-report:latest" \
