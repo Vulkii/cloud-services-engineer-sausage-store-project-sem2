@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sausage-store-frontend-service
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-service
   labels:
     app: sausage-store-frontend
 spec:
   type: ClusterIP
   ports:
-    - port: {{ .Values.frontend.service.port }}
-      targetPort: {{ .Values.frontend.containerPort }}
+    - port: {{ .Values.frontend.service.port | default 80 }}
+      targetPort: {{ .Values.frontend.containerPort | default 80 }}
   selector:
     app: sausage-store-frontend
