@@ -79,7 +79,7 @@ backend:
             memory: "512Mi"
 
 backend-report:
-  image: p1lan/sausage-backend-report:latest"
+  image: p1lan/sausage-backend-report:latest
 
   global:
     imagePullPolicy: IfNotPresent
@@ -92,8 +92,8 @@ backend-report:
   containerPort: 8080
 
   env:
-    port: "8080"                             # PORT
-    db: "mongodb://mongodb:27017/reports"    # DB
+    port: "8080"
+    db: "mongodb://mongodb:27017/reports"
 
   resources:
     requests:
@@ -107,15 +107,8 @@ backend-report:
     httpGet:
       path: /health
       port: 8080
-    initialDelaySeconds: 10
+    initialDelaySeconds: 15
     periodSeconds: 20
-
-  readinessProbe:
-    httpGet:
-      path: /health
-      port: 8080
-    initialDelaySeconds: 5
-    periodSeconds: 10
 
   hpa:
     enabled: true
