@@ -15,7 +15,8 @@ frontend:
     tlsSecret: 2sem-students-projects-wildcard-secret
     path: /
     pathType: Prefix
-  image: YOUR_DOCKERHUB/sausage-frontend:latest
+  containerPort: 80
+  image: p1lan/sausage-frontend:latest
   resources:
     requests:
       memory: "128Mi"
@@ -45,7 +46,7 @@ backend:
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
-  image: YOUR_DOCKERHUB/sausage-backend:latest
+  image: p1lan/sausage-backend:latest
   imagePullPolicy: Always
   resources:
     requests:
@@ -78,7 +79,7 @@ backend:
             memory: "512Mi"
 
 backend-report:
-  image: YOUR_DOCKERHUB/sausage-backend-report:latest"
+  image: p1lan/sausage-backend-report:latest"
 
   global:
     imagePullPolicy: IfNotPresent
