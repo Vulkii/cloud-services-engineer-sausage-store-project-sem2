@@ -29,4 +29,4 @@ spec:
               service:
                 name: {{ .Release.Name }}-{{ .Chart.Name }}-service
                 port:
-                  number: {{ .Values.frontend.containerPort }}
+                  number: {{ .Values.service.port }}

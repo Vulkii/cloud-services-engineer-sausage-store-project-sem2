@@ -15,7 +15,6 @@ frontend:
     tlsSecret: 2sem-students-projects-wildcard-secret
     path: /
     pathType: Prefix
-  containerPort: 80
   image: YOUR_DOCKERHUB/sausage-frontend:latest
   resources:
     requests:
