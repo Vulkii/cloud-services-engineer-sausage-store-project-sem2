@@ -93,7 +93,7 @@ backend-report:
 
   env:
     port: "8080"
-    db: "mongodb://mongodb:27017/reports?authSource=admin"
+    db: "mongodb://root:rootpassword@mongodb:27017/reports?authSource=admin"
 
   resources:
     requests:
