@@ -7,7 +7,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: {{ .Values.frontend.service.port | default 80 }}
-      targetPort: {{ .Values.frontend.containerPort | default 80 }}
+    - port: {{ .Values.service.port | default 80 }}
+      targetPort: {{ .Values.containerPort | default 80 }}
   selector:
     app: sausage-store-frontend
