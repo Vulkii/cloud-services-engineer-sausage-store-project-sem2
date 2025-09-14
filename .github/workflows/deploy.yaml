@@ -102,7 +102,8 @@ jobs:
           helm cm-push ./packaged-chart/sausage-store-*.tgz chartmuseum \
             --username="${{ env.NEXUS_HELM_REPO_USER }}" \
             --password="${{ env.NEXUS_HELM_REPO_PASSWORD }}" \
-            --context-path="/repository/Vulkii-sosage-store"
+            --context-path="/repository/Vulkii-sosage-store" \
+            --force
 
   deploy_helm_chart_to_kubernetes:
     name: Deploy Helm Chart To Kubernetes
