@@ -15,7 +15,9 @@ frontend:
   service:
     port: 80
   ingress:
-    host: YOUR_STUDENT_HOSTNAME.students-projects.ru # Корректный домен будет указан в задании
+    enabled: true
+    host: Vulkii.2sem.students-projects.ru
+    tlsSecret: 2sem-students-projects-wildcard-secret
     path: /
     pathType: Prefix
   containerPort: 80
@@ -62,15 +64,54 @@ backend:
   ### Опишите VPA для бэкенда
 
 backend-report:
-### Опишите значения для backend-report
-### Приложение должно использовать стратегию Recreate
-### Приложение использует переменную PORT - порт, на котором оно запустится и DB - Uri-подключение к mongodb. 
-### DB положите в Secret, PORT в ConfigMap
-### Опишите HPA для backend-report
+  image: YOUR_DOCKERHUB/sausage-backend-report:latest"
+
+  global:
+    imagePullPolicy: IfNotPresent
+
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+
+  containerPort: 8080
+
+  env:
+    port: "8080"                             # PORT
+    db: "mongodb://mongodb:27017/reports"    # DB
+
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+    limits:
+      cpu: "100m"
+      memory: "128Mi"
+
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 8080
+    initialDelaySeconds: 10
+    periodSeconds: 20
+
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 10
+
+  # HPA
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    cpuUtilizationPercentage: 60
+
 
 infra:
   postgresql:
-  ### Опишите необходимые переменные для развертывания PostgresQL в кластере Kubernetes
   mongodb:
     env:
       MONGO_INITDB_ROOT_USERNAME: root
