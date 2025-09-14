@@ -89,11 +89,10 @@ jobs:
         id: set_version
         run: |
           CHART_PATH="./sausage-store-chart/Chart.yaml"
-          CURRENT=$(grep '^version:' "$CHART_PATH" | awk '{print $2}')
-          NEXT=$(echo "$CURRENT" | awk -F. '{$NF += 1; print}' OFS='.')
-          echo "Updating chart version: $CURRENT → $NEXT"
-          sed -i "s/^version: .*/version: $NEXT/" "$CHART_PATH"
-          echo "NEW_VERSION=$NEXT" >> $GITHUB_OUTPUT
+          NEW_VERSION="0.1.${GITHUB_RUN_NUMBER}"
+          echo "Updating chart version: $NEW_VERSION"
+          sed -i "s/^version: .*/version: $NEW_VERSION/" "$CHART_PATH"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Package and Push Helm Chart to Nexus
         run: |
