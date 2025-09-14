@@ -117,7 +117,6 @@ backend-report:
     initialDelaySeconds: 5
     periodSeconds: 10
 
-  # HPA
   hpa:
     enabled: true
     minReplicas: 1
